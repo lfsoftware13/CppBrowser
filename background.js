@@ -17,7 +17,9 @@ function logURL(tabId, url, title, status){
 	obj["url"] = url;
 	obj["title"] = title;
 	var json_str = JSON.stringify(obj)
-	var i=localStorage["count"];
+	if(isNaN(localStorage["count"])){
+		localStorage["count"]=0;
+	}
 	localStorage["count"]++;
-	localStorage["Cpp"+i] = json_str
+	localStorage[localStorage["count"].toString()] = json_str
 }
