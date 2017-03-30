@@ -6,7 +6,8 @@
   "version": "1.0",
 
   "background": { 
-    "scripts": ["jquery-3.2.0.min.js", "json2.js", "background.js"] ,
+    "page": "background.html",
+    //"scripts": ["jquery-3.2.0.min.js", "json2.js", "background.js"] ,
     "persistent": true
   },
 
@@ -20,6 +21,14 @@
     "tabs", 
     "webRequestBlocking", 
     "<all_urls>", 
-    "unlimitedStorage"
-  ]
+    "unlimitedStorage", 
+    "clipboardWrite", 
+    "clipboardRead"
+  ], 
+  "content_scripts": [
+      {
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["clipevent.js"]
+      }
+    ]
 }
