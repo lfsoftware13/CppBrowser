@@ -7,17 +7,22 @@ function registerTabListener(){
 
 function onUpdatedCallback(tabId, changeInfo, tab){
 	if(changeInfo.status == "complete"){
-  		logURL(tabId, tab.url, tab.title, changeInfo.status);
+  		logURL(tabId, tab, changeInfo.status);
 	}
 }
 
-function logURL(tabId, url, title, status){
+function logURL(tabId, tab, status){
 	var obj = {};
 	obj["time"] = getCurrentTime();
 	obj["type"] = "url";
 	obj["tabId"] = tabId;
-	obj["title"] = title;
-	obj["url"] = url;
+	obj["title"] = tab.title;
+	obj["url"] = tab.url;
+	openerTabId = -1;
+	if(typeof(tab.openerTabId) != "undefined"){
+		openerTabId = tab.openerTabId;
+	}
+	obj["openerTabId"] = openerTabId;
 	var json_str = JSON.stringify(obj)
 	if(isNaN(localStorage["count"])){
 		localStorage["count"]=0;
