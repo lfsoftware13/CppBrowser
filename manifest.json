@@ -3,11 +3,17 @@
 
   "name": "CppBrowser",
   "description": "This extension is used for analysising the behavior of people while they are coding. ",
-  "version": "1.0",
+  "version": "1.1",
+
+  "icons": {  
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png" 
+  },
 
   "background": { 
     "page": "background.html",
-    //"scripts": ["jquery-3.2.0.min.js", "json2.js", "background.js"] ,
     "persistent": true
   },
 

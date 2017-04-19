@@ -3,12 +3,17 @@ registerTabListener();
 
 function registerTabListener(){
 	chrome.tabs.onUpdated.addListener(onUpdatedCallback)
+	chrome.tabs.onRemoved.addListener(onRemovedCallback)
 }
 
 function onUpdatedCallback(tabId, changeInfo, tab){
 	if(changeInfo.status == "complete"){
   		logURL(tabId, tab, changeInfo.status);
 	}
+}
+
+function onRemovedCallback(tabId, removeInfo){
+	logCloseTab(tabId, removeInfo['windowId'], removeInfo['isWindowClosing'])
 }
 
 function logURL(tabId, tab, status){
@@ -23,6 +28,22 @@ function logURL(tabId, tab, status){
 		openerTabId = tab.openerTabId;
 	}
 	obj["openerTabId"] = openerTabId;
+	var json_str = JSON.stringify(obj)
+	if(isNaN(localStorage["count"])){
+		localStorage["count"]=0;
+	}
+	localStorage["count"]++;
+	localStorage[localStorage["count"].toString()] = json_str
+}
+
+function logCloseTab(tabId, windowId, isWindowClosing){
+	var obj = {};
+	obj["time"] = getCurrentTime();
+	obj["type"] = "url_close";
+	obj["tabId"] = tabId;
+	obj["windowId"] = windowId;
+	obj["isWindowClosing"] = isWindowClosing;
+
 	var json_str = JSON.stringify(obj)
 	if(isNaN(localStorage["count"])){
 		localStorage["count"]=0;

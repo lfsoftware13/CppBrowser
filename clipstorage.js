@@ -20,7 +20,7 @@ function onMessageCallback(request, sender, sendResponse) {
 			obj["time"] = getCurrentTime();
 			obj["type"] = type;
 			obj["content"] = text;
-			obj["tabId"] = tabs[0].tabId;
+			obj["tabId"] = tabs[0].id;
 			obj["title"] = tabs[0].title;
 			obj["url"] = tabs[0].url;
 
