@@ -4,7 +4,7 @@ function registerMessageListener(){
 	chrome.runtime.onMessage.addListener(onMessageCallback);
 }
 
-function onMessageCallback(request, sender, sendResponse) {
+function store(request, sender, sendResponse) {
 	if (request.event == "copy" || request.event == "paste" || request.event == "cut") {
 		var type=request.event;
 		var text=getClipText();
@@ -33,6 +33,20 @@ function onMessageCallback(request, sender, sendResponse) {
 
 	}
 	sendResponse({});
+}
+
+function onMessageCallback(request, sender, sendResponse){
+
+	if(request.event == "copy" || request.event == "cut"){
+		a = 0
+		for(i=0;i<10000;i++){
+			for(j=0;j<10000;j++){
+				a++;
+			}
+		} 
+	}
+
+	store(request, sender, sendResponse);
 }
 
 function getClipText(){
